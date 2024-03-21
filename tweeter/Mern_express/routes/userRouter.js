@@ -7,7 +7,7 @@ routes.get("/getuser", (req, res) => {
 // routes.post("/createRole", userRouter.createRole);
 // routes.post("/getRole", userRouter.getRole);
 routes.post("/createUser", userRouter.createUser);
-routes.post("/getUser", userRouter.getAllUser);
+routes.post("/getAllUser", userRouter.getAllUser);
 routes.delete("/deleteUser", userRouter.deleteUser);
 routes.patch("/recoverUser", userRouter.recoverUser);
 routes.put("/updateUser", userRouter.updatedUser);
