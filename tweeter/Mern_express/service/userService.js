@@ -3,56 +3,56 @@ const {v4: uuid} = require("uuid");
 const hash = require("bcryptjs")
 
 module.exports = {
-    createRole: async (body) =>{
-        try{
-            body.roleId = uuid();
-           const role = await userModel.createRole(body);
-           if(role.error){
-            return{
-                error: role.error,
-            }
-           }
-           return{
-            response: role.response
-           }
-        }catch(error){
-            return {
-                error: error.message
-            }
-        }
-    },
+    // createRole: async (body) =>{
+    //     try{
+    //         body.roleId = uuid();
+    //        const role = await userModel.createRole(body);
+    //        if(role.error){
+    //         return{
+    //             error: role.error,
+    //         }
+    //        }
+    //        return{
+    //         response: role.response
+    //        }
+    //     }catch(error){
+    //         return {
+    //             error: error.message
+    //         }
+    //     }
+    // },
 
-    getRole: async ()=>{
-        try{
-          const role = await userModel.getRole();
-          if (role.error){
-            return{
-                error: role.error
-            }
-          }
-          return{
-            response: role.response
-          }
-        }catch(error){
-           return{
-            error: error.message
-           }
-        }
-    },
+    // getRole: async ()=>{
+    //     try{
+    //       const role = await userModel.getRole();
+    //       if (role.error){
+    //         return{
+    //             error: role.error
+    //         }
+    //       }
+    //       return{
+    //         response: role.response
+    //       }
+    //     }catch(error){
+    //        return{
+    //         error: error.message
+    //        }
+    //     }
+    // },
 
     createUser : async (body)=>{
         try {
-            const address = {
-                addressId : uuid(),
-                address: body.address,
-            }
+            // const address = {
+            //     addressId : uuid(),
+            //     address: body.address,
+            // }
 
-            const creatAddress = await userModel.creatAddress(address);
-                if(creatAddress.error){
-                    return{
-                        error: creatAddress.error
-                    }
-                }
+            // const creatAddress = await userModel.creatAddress(address);
+            //     if(creatAddress.error){
+            //         return{
+            //             error: creatAddress.error
+            //         }
+            //     }
 
 
             const isUser = await userModel.getuserByUsername(body.userName);
@@ -66,8 +66,8 @@ module.exports = {
                 userId: uuid(),
                 userName: body.userName,
                 password: body.password, 
-                roleId: body.roleId,
-                addressId: address.addressId
+                // roleId: body.roleId,
+                // addressId: address.addressId
             }
 
             const createUser = await userModel.creatUser(user)

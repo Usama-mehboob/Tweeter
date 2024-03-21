@@ -4,8 +4,8 @@ routes.get("/getuser", (req, res) => {
     res.send("Get All user Api");
 });
 
-routes.post("/createRole", userRouter.createRole);
-routes.post("/getRole", userRouter.getRole);
+// routes.post("/createRole", userRouter.createRole);
+// routes.post("/getRole", userRouter.getRole);
 routes.post("/createUser", userRouter.createUser);
 routes.post("/getUser", userRouter.getAllUser);
 routes.delete("/deleteUser", userRouter.deleteUser);

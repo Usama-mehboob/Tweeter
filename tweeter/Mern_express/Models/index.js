@@ -1,24 +1,25 @@
 const  sequelize = require("../bin/dbConnection");
 
 const USERS = require("./Definitions/users");
-const Tweet = require("./Definitions/tweet");
+const TWEET = require("./Definitions/tweet");
+const COMMENT = require('./Definitions/comments')
 
-//relation  datbase connection 
-Address.hasOne(USERS, {foreignKey: "addressId"});
-USERS.belongsTo(Address, {foreignKey: "addressId"});
 
-Role.hasMany(USERS, {foreignKey: "roleId"});
-USERS.belongsTo(Role, {foreignKey: "roleId"});
+//user and tweet relations
+USERS.hasMany(TWEET, { foreignKey: 'userId' });
+TWEET.belongsTo(USERS, { foreignKey: 'userId' });
 
-userCourses.hasMany(USERS, {foreignKey: "userCourseId"});
-USERS.belongsTo(userCourses, {foreignKey: "userCourseId"});
-userCourses.hasMany(Courses, {foreignKey: "userCourseId"});
-Courses.belongsTo(userCourses, {foreignKey: "userCourseId"})
+
+//user and comment relation 
+USERS.hasMany(COMMENT, { foreignKey: 'userId' });
+COMMENT.belongsTo(USERS, { foreignKey: 'userId' });
+
 
 
 const models = {
     users: USERS,
-    tweet: Tweet,
+    tweet: TWEET,
+    Comment: COMMENT
 };
 
 const db ={};

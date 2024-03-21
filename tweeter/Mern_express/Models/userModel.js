@@ -2,44 +2,44 @@ const { Op } = require("sequelize");
 const {models} = require("./index");
 
 module.exports = {
-    createRole: async (body)=>{
-        try{
-            const role = await models.role.create({...body});
-            return{
-                response: role,
-            }
-        }catch(error){
-            return{
-                error: error.message,
-            }
-        }
-    },
+    // createRole: async (body)=>{
+    //     try{
+    //         const role = await models.role.create({...body});
+    //         return{
+    //             response: role,
+    //         }
+    //     }catch(error){
+    //         return{
+    //             error: error.message,
+    //         }
+    //     }
+    // },
 
-    getRole: async () =>{
-        try{
-           const role = await models.role.findAll();
-            return{
-                response: role,
-            }
-        }catch(error){
-            return{
-                error: error.message
-            }
-        }
-    },
+    // getRole: async () =>{
+    //     try{
+    //        const role = await models.role.findAll();
+    //         return{
+    //             response: role,
+    //         }
+    //     }catch(error){
+    //         return{
+    //             error: error.message
+    //         }
+    //     }
+    // },
 
-    creatAddress: async (body)=>{
-        try {
-            const creatAddress = await models.address.create({...body})
-            return{
-                responce: creatAddress,
-            }
-        } catch (error) {
-            return{
-                error: error.message,
-            }
-        }
-    },
+    // creatAddress: async (body)=>{
+    //     try {
+    //         const creatAddress = await models.address.create({...body})
+    //         return{
+    //             responce: creatAddress,
+    //         }
+    //     } catch (error) {
+    //         return{
+    //             error: error.message,
+    //         }
+    //     }
+    // },
 
 
     creatUser: async (body)=>{
