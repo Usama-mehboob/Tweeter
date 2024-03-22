@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require("cors");
 
 // routes
-var routes = require("./routes/userRouter")
+// var routes = require("./routes/userRouter")
 var Authrouter = require("./routes/Authroutes")
 var userRouter = require("./routes/userRouter")
 var app = express();
@@ -24,7 +24,7 @@ app.use(cookieParser());
 // Apply CORS middleware without the trailing comma
 app.use(cors());
 
-app.use("/user", routes);
+// app.use("/user", routes);
 app.use("/authUser", Authrouter);
 app.use("/user", userRouter);
 

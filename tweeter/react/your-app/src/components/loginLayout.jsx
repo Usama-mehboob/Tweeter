@@ -10,7 +10,7 @@ function  Login ({setLogin}) {
   const login = async() =>{
     console.log("userName", userName);
     console.log("password", password);
-    const {data} = await axios.post("http://localhost3001/authUser/login", {
+    const {data} = await axios.post("http://localhost:3001/authUser/login", {
       userName,
       password
     });
@@ -28,7 +28,7 @@ function  Login ({setLogin}) {
         <div className="w-1/4 h-full py-4 flex items-center ">
           <div className="w-full h-3/5 bg-white rounded-md"> 
             <div className="flex h-1/5 justify-center"> 
-                <h1 className="text-gray-600 font-semibold">Login</h1>
+                <h1 className="text-gray-600 font-semibold flex justify" > Login</h1>
             </div>
             <div className="h-3/5 flex flex-col p-4 ">
                 <label className="text-xl text-gray-600 my-2 fotn-semibold">
