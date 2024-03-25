@@ -12,6 +12,10 @@ routes.delete("/deleteUser", userRouter.deleteUser);
 routes.patch("/recoverUser", userRouter.recoverUser);
 routes.put("/updateUser", userRouter.updatedUser);
 
+routes.post("/createTweet", userRouter.createTweet);
+routes.get("/getAllTweet", userRouter.getTweet);
+routes.delete("/deleteTweet", userRouter.deleteTweet);
+routes.put("/updateTweet", userRouter.updatedTweet);
 
 
 

@@ -1,9 +1,9 @@
 const userService = require("../service/userService");
 const joi = require("joi");
 
-// const createRoleSchema = joi.object().keys({
-//     rolename: joi.string().required()
-// })
+const createTweetSchema = joi.object().keys({
+    rolename: joi.string().required()
+})
 
 const deleteUserSchema = joi.object().keys({
     userId: joi.string().min(1).required()
@@ -13,9 +13,18 @@ const updatedUserSchema = joi.object().keys({
     userName: joi.string().required()
 })
 
-const getRoleSchema = joi.object().keys({
+const getTweetSchema = joi.object().keys({
     rolename: joi.string().required()
 })
+
+const deleteTweetSchema = joi.object().keys({
+    userId: joi.string().min(1).required()
+})
+
+const updatedTweetSchema = joi.object().keys({
+    userName: joi.string().required()
+})
+
 
 // const getAllUserchema = joi.object().keys({
 //     userName: joi.string().required()
@@ -31,44 +40,87 @@ const createUserSchema = joi.object().keys({
 })
 
 module.exports = {
-//    createRole: async (req, res)=>{
-//     const validate = await createRoleSchema.validateAsync(req.body)
-//     const role = await userService.createRole(validate);
+   createTweet: async (req, res)=>{
+    const validate = await createTweetSchema.validateAsync(req.body)
+    const tweet = await userService.createTweet(validate);
 
-//     try{
-//         if(role.error){
-//             return res.send({
-//                 error: role.error
-//             })
-//         }
-//         return res.send({
-//             response: role.response
-//         })
-//     }catch(error){
-//         return res.send({
-//             error: error.message
-//         })
-//     }    
-//     },
-//     getRole: async (req, res)=>{
+    try{
+        if(tweet.error){
+            return res.send({
+                error: tweet.error
+            })
+        }
+        return res.send({
+            response: tweet.response
+        })
+    }catch(error){
+        return res.send({
+            error: error.message
+        })
+    }    
+    },
 
-//         try{
-//             const validate = await getRoleSchema.validateAsync()
-//             const   role = await userService.getRole(validate);
-//             if(role.error){
-//                 return res.send({
-//                     error: role.error
-//                 })
-//             }
-//             return res.send({
-//                 response: role.response
-//             })
-//         }catch(error){
-//             return res.send({
-//                 error: error.message
-//             })
-//         }    
-//     },
+
+    getTweet: async (req, res)=>{
+
+        try{
+            const validate = await getTweetSchema.validateAsync()
+            const   tweet = await userService.getTweets(validate);
+            if(tweet.error){
+                return res.send({
+                    error: tweet.error
+                })
+            }
+            return res.send({
+                response: tweet.response
+            })
+        }catch(error){
+            return res.send({
+                error: error.message
+            })
+        }    
+    },
+
+    deleteTweet: async (req, res)=>{
+        try {
+            const validate = await deleteTweetSchema.validateAsync(req.query);
+            const deletedTweet = await userService.deleteTweet(validate);
+            if (deletedTweet.error){
+                return res.send({
+                    error: deletedTweet.error
+                })
+              }
+              return res.send({
+                response: deletedTweet.response
+              })
+           
+        } catch (error) {
+            return res.send({
+                error: error.message
+            })
+        }
+    },
+
+
+    updatedTweet: async (req, res)=>{
+        try {
+            const validate = await updatedTweetSchema.validateAsync(req.body)
+           const updatedTweet = await userService.updatedTweet(validate);
+           if (updatedTweet.error){
+            return res.send({
+                error: updatedTweet.error
+            })
+          }
+          return res.send({
+            response: updatedTweet.response
+          })
+            
+        } catch (error) {
+            return res.send({
+                error: error.message
+            })
+        }
+    },
 
     createUser: async (req, res)=>{
         try {

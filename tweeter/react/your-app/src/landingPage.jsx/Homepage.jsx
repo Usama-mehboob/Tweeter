@@ -25,7 +25,7 @@ function Home (){
                 <div className="my-4 ">
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="w-9 m-auto  r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp r-1nao33i r-16y2uox r-8kz0gk"><FaXTwitter /></svg>
                 </div>
-                <div className="flex justify-end">
+                <div className="flex items-end flex-col">
                     <ul className="flex flex-col text-2xl space-y-3 px-12 font-bold" >
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full "> <span><BiHomeCircle /></span>Home</li>
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full "><span><HiOutlineHashtag /></span>Explore</li>
@@ -34,7 +34,13 @@ function Home (){
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full "><span><TbMessageCircle2Filled /></span>Messages</li>
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full "><span><CgProfile /></span>Profile</li>
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full "><span><BiHomeCircle /></span>more</li>
+                        <li>
+                            <div className="w-full text-center my-2">
+                                <button className="bg-blue-600 px-9 text-2xl text-white rounded-full">Post</button>
+                            </div>
+                        </li>
                     </ul>
+                   
                 </div>
             </div>
 

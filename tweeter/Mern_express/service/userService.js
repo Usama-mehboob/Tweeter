@@ -3,42 +3,82 @@ const {v4: uuid} = require("uuid");
 const hash = require("bcryptjs")
 
 module.exports = {
-    // createRole: async (body) =>{
-    //     try{
-    //         body.roleId = uuid();
-    //        const role = await userModel.createRole(body);
-    //        if(role.error){
-    //         return{
-    //             error: role.error,
-    //         }
-    //        }
-    //        return{
-    //         response: role.response
-    //        }
-    //     }catch(error){
-    //         return {
-    //             error: error.message
-    //         }
-    //     }
-    // },
+    createTweet: async (body) =>{
+        try{
+            // body.roleId = uuid();
+           const createdTweet = await userModel.createTweet(body);
+           if(createdTweet.error){
+            return{
+                error: createdTweet.error,
+            }
+           }
+           return{
+            response: createdTweet.response
+           }
+        }catch(error){
+            return {
+                error: error.message
+            }
+        }
+    },
 
-    // getRole: async ()=>{
-    //     try{
-    //       const role = await userModel.getRole();
-    //       if (role.error){
-    //         return{
-    //             error: role.error
-    //         }
-    //       }
-    //       return{
-    //         response: role.response
-    //       }
-    //     }catch(error){
-    //        return{
-    //         error: error.message
-    //        }
-    //     }
-    // },
+    
+
+    getTweets: async ()=>{
+        try{
+          const gettweet = await userModel.getTweet();
+          if (gettweet.error){
+            return{
+                error: gettweet.error
+            }
+          }
+          return{
+            response: gettweet.response
+          }
+        }catch(error){
+           return{
+            error: error.message
+           }
+        }
+    },
+
+    deleteTweet: async (query)=>{
+        try {
+            const deletedTweet = await userModel.deleteTweet(query.userId);
+            if (deletedTweet.error){
+                return{
+                    error: deletedTweet.error
+                }
+              }
+              return{
+                response: deletedTweet.responce
+              }
+           
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
+
+    updatedTweet: async (body)=>{
+        try {
+           const updatedtweet = await userModel.updatetweet(body, body.userId);
+           if (updatedtweet.error){
+            return{
+                error: updatedtweet.error
+            }
+          }
+          return{
+            response: updatedtweet.responce
+          }
+            
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
 
     createUser : async (body)=>{
         try {

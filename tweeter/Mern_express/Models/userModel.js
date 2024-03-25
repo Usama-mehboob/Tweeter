@@ -2,31 +2,72 @@ const { Op } = require("sequelize");
 const {models} = require("./index");
 
 module.exports = {
-    // createRole: async (body)=>{
-    //     try{
-    //         const role = await models.role.create({...body});
-    //         return{
-    //             response: role,
-    //         }
-    //     }catch(error){
-    //         return{
-    //             error: error.message,
-    //         }
-    //     }
-    // },
+    createTweet: async (body)=>{
+        try{
+            const tweet = await models.tweet.create({...body});
+            return{
+                response: tweet,
+            }
+        }catch(error){
+            return{
+                error: error.message,
+            }
+        }
+    },
 
-    // getRole: async () =>{
-    //     try{
-    //        const role = await models.role.findAll();
-    //         return{
-    //             response: role,
-    //         }
-    //     }catch(error){
-    //         return{
-    //             error: error.message
-    //         }
-    //     }
-    // },
+    getTweet : async () =>{
+        try{
+           const tweet = await models.tweet.findAll();
+            return{
+                response: tweet,
+            }
+        }catch(error){
+            return{
+                error: error.message
+            }
+        }
+    },
+
+    deleteTweet: async (userId)=>{
+        try {
+            const deletedTweet = await models.tweet.destroy({
+                // This is and operator if you want check both condition then use it 
+                // where: {
+                //     userId:  1,
+                //     userName: "user1"
+                // }
+                where: {
+                    userId:  userId,
+                }
+            })
+            return{
+                responce: deletedTweet,
+            }
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
+    updatetweet: async (body, userId)=>{
+        try {
+           const updatedTweet = await models.users.update({
+            ...body,
+           },
+           {
+            where:{
+               userId: userId,
+            },
+           });
+            return{
+                responce: updatedTweet,
+            }
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
 
     // creatAddress: async (body)=>{
     //     try {
