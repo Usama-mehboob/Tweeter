@@ -10,7 +10,7 @@ Tweet.init({
     },
     tweetText: {
         type: DataTypes.STRING,
-        allowNull: false
+        // allowNull: false
     }
 },{
     timestamps: true,

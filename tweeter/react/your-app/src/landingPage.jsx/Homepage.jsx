@@ -16,12 +16,13 @@ import { MdEmojiEmotions } from "react-icons/md";
 function Home (){
     const [Tweet, setTweets] = useState([])
     const getAlltweets = async ()=>{
-        const {data: Tweet} = await axios.get( "http://localhost:3001/user/getAllTweet", {
+        const {data: Tweets} = await axios.get( "http://localhost:3001/user/getAllTweet", {
             withCredentials: true
         })     
+        console.log("tweet", Tweets )
         // console.log(Products)
                
-        setTweets(Tweet.response)
+        setTweets(Tweets.response)
     };
     useEffect(()=>{
         void getAlltweets();
@@ -89,8 +90,19 @@ function Home (){
                         </div>
                     </div>
                     <div className="h-full bg-red-600">
-                        <div className="w-full h-1/2 bg-white">
-
+                        <div className="w-full h-1/2 bg-white text-black">
+                            {Tweet != null ? (
+                                <>
+                                {Tweet.map((item, index) =>{
+                                return<Tweets item={item} key={index}/>
+                                })}
+                                </>
+                            ):(
+                                <>
+                                    <p>Tweets is no Available</p>
+                                </>
+                            )
+                            }
                         </div>
                     </div>
                 <div className="h-[1px] w-full bg-gray-700" />

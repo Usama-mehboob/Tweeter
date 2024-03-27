@@ -34,6 +34,7 @@ const updatedTweetSchema = joi.object().keys({
 
 const createUserSchema = joi.object().keys({
     userName: joi.string().required(),
+    tweetText:  joi.string(),
     password: joi.string().required(),//pattern(new RegExp("^[a-zA-Z0-9]{3, 30}$")),
     // confirmPassword: joi.ref("password"),
     // address: joi.string().required(),
