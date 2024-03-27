@@ -2,7 +2,8 @@ const userService = require("../service/userService");
 const joi = require("joi");
 
 const createTweetSchema = joi.object().keys({
-    rolename: joi.string().required()
+    userName: joi.string().required(),
+    tweetText:  joi.string()
 })
 
 const deleteUserSchema = joi.object().keys({
@@ -41,10 +42,10 @@ const createUserSchema = joi.object().keys({
 
 module.exports = {
    createTweet: async (req, res)=>{
-    const validate = await createTweetSchema.validateAsync(req.body)
-    const tweet = await userService.createTweet(validate);
-
+       
     try{
+        const validate = await createTweetSchema.validateAsync(req.body)
+        const tweet = await userService.createTweet(validate);
         if(tweet.error){
             return res.send({
                 error: tweet.error

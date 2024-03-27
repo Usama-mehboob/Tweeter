@@ -95,6 +95,22 @@ module.exports = {
             }
         }
     },
+    getuserByUsername: async (userName) =>{
+        try {
+           const user = await models.users.findOne({
+            where:{
+                userName :  userName,
+            }
+           });
+            return{
+                responce: user,
+            }
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
     getAllUser: async ()=>{
         try {
             const getAllUser = await models.users.findAll({

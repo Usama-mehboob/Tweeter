@@ -5,7 +5,7 @@ const hash = require("bcryptjs")
 module.exports = {
     createTweet: async (body) =>{
         try{
-            // body.roleId = uuid();
+            body.roleId = uuid();
            const createdTweet = await userModel.createTweet(body);
            if(createdTweet.error){
             return{
@@ -82,17 +82,17 @@ module.exports = {
 
     createUser : async (body)=>{
         try {
-            // const address = {
-            //     addressId : uuid(),
-            //     address: body.address,
-            // }
+            const Tweet = {
+                tweetId : uuid(),
+                tweetId: body.tweetId,
+            }
 
-            // const creatAddress = await userModel.creatAddress(address);
-            //     if(creatAddress.error){
-            //         return{
-            //             error: creatAddress.error
-            //         }
-            //     }
+            const creatTweet= await userModel.createTweet(Tweet);
+                if(creatTweet.error){
+                    return{
+                        error: creatTweet.error
+                    }
+                }
 
 
             const isUser = await userModel.getuserByUsername(body.userName);
@@ -107,7 +107,7 @@ module.exports = {
                 userName: body.userName,
                 password: body.password, 
                 // roleId: body.roleId,
-                // addressId: address.addressId
+                tweetId: Tweet.tweetId
             }
 
             const createUser = await userModel.creatUser(user)

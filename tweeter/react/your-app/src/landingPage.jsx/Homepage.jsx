@@ -1,3 +1,5 @@
+import axios from "axios"
+
 import { BiHomeCircle } from "react-icons/bi";
 import { IoNotifications } from "react-icons/io5";
 import { HiOutlineHashtag } from "react-icons/hi";
@@ -12,6 +14,18 @@ import { MdOutlineGifBox } from "react-icons/md";
 import { MdEmojiEmotions } from "react-icons/md";
 
 function Home (){
+    const [Tweet, setTweets] = useState([])
+    const getAlltweets = async ()=>{
+        const {data: Tweet} = await axios.get( "http://localhost:3001/user/getAllTweet", {
+            withCredentials: true
+        })     
+        // console.log(Products)
+               
+        setTweets(Tweet.response)
+    };
+    useEffect(()=>{
+        void getAlltweets();
+    }, [])
     return(
         <>
      
@@ -47,19 +61,19 @@ function Home (){
             {/*  center Pooint */}
 
             <div className="w-full  border border-white border-y-black">
-                <div className="flex p-3 relative">
-                    <div className="absolute w-12  h-1 rounded-full bg-blue-700 bottom-0 left-[20%]"></div>
-                    <div className="w-1/2 flex justify-center font-bold text-lg">For-you</div>
-                    <div className="w-1/2 flex justify-center font-bold text-lg">Following</div>
-                    <div className="mx-2 my-2"><span><IoSettingsOutline /></span></div>
-                </div>
-                <div className="h-[1px] w-full bg-gray-700" />
-
-                <div className="flex gap-4 my-3">
-                    <div className="m-2 ">
-                        <img className ="border rounded-full" src="https://pbs.twimg.com/profile_images/1771632575930335232/AqwZY4Wl_normal.png" alt="profile" />
+                    <div className="flex p-3 relative">
+                        <div className="absolute w-12  h-1 rounded-full bg-blue-700 bottom-0 left-[20%]"></div>
+                        <div className="w-1/2 flex justify-center font-bold text-lg">For-you</div>
+                        <div className="w-1/2 flex justify-center font-bold text-lg">Following</div>
+                        <div className="mx-2 my-2"><span><IoSettingsOutline /></span></div>
                     </div>
-                        <div>
+                    <div className="h-[1px] w-full bg-gray-700" />
+
+                    <div className="flex gap-4 my-3">
+                        <div className="m-2 ">
+                            <img className ="border rounded-full" src="https://pbs.twimg.com/profile_images/1771632575930335232/AqwZY4Wl_normal.png" alt="profile" />
+                        </div>
+                         <div>
                             <input className="w-full h-7 my-5 text-xl bg-black text-white  outline-none" type="text" placeholder="What is happening" />
                             <div className="text-blue-600 flex items-center gap-3">
                             <span className=""><FaGlobeAmericas /></span>
@@ -72,8 +86,13 @@ function Home (){
                             <span className="cursor-pointer"><MdOutlineGifBox /></span>
                             <span className="cursor-pointer"><MdEmojiEmotions /></span>
                         </div>
+                        </div>
                     </div>
-                </div>
+                    <div className="h-full bg-red-600">
+                        <div className="w-full h-1/2 bg-white">
+
+                        </div>
+                    </div>
                 <div className="h-[1px] w-full bg-gray-700" />
                 
             </div>
