@@ -121,13 +121,13 @@ module.exports = {
                 // },
                 attributes:["userId", "userName"],
                 include:[
+                    // {
+                    //     model: models.address,
+                    //     attributes:["addressId", "addressNo"]
+                    // },
                     {
-                        model: models.address,
-                        attributes:["addressId", "addressNo"]
-                    },
-                    {
-                        model: models.role,
-                        attributes:["roleId", "rolename"]
+                        model: models.tweet,
+                        attributes:["tweetId", "tweetText"]
                     }
                 ]
             })
