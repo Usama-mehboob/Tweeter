@@ -25,7 +25,6 @@ module.exports = {
             const validate  = await loginSchema.validateAsync(req.body);
             const loginResponse = await authService.login(validate);
             
-           
             if (loginResponse.error){
                 return res.send ({
                     error: loginResponse.error
@@ -33,15 +32,12 @@ module.exports = {
             }
             res.cookie("Token", loginResponse.responce, {maxAge: 900000, httpOnly: true})
             return res.send({
-                response: true
+                response: true,
+                token: loginResponse.responce,
+                userId: loginResponse.responce.userId,
+          
             });
-
             
-            
-            // return res.send({
-            //     message: "All ook",
-            //     data: validate
-            // });     
         }catch(error){
             return   res.send({
                  error: error.message

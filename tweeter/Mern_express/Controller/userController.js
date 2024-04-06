@@ -3,6 +3,7 @@ const joi = require("joi");
 
 const createTweetSchema = joi.object().keys({
     userName: joi.string().required(),
+    // userId: joi.string().required(),
     tweetText:  joi.string()
 })
 

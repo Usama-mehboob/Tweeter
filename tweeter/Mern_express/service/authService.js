@@ -1,6 +1,6 @@
 const bcrpyt = require("bcryptjs");
 const userModel = require("../Models/userModel");
-const {compare} =require("bcryptjs");
+const {compare, hash} =require("bcryptjs");
 const {sign} = require('jsonwebtoken');
 require("dotenv").config();
 
@@ -22,11 +22,15 @@ module.exports = {
     login :async (body) =>{
         try {
            const user = await userModel.getuserByUsername(body.userName);
+        //    console.log("user", user)
            if (user.error || user.responce == null ){
             return{
-                error: "Invalid Credentials"
+                error: "Invalid user Credentials"
             }
            }
+
+           body.password = await hash(body.password, 10);
+
            const isValid = await compare(body.password, user.responce.dataValues.password );
            if (isValid.error){
             return{

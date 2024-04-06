@@ -8,8 +8,8 @@ function  Login ({setLogin}) {
   const [password, setPassword] = useState(null);
 
   const login = async() =>{
-    console.log("userName", userName);
-    console.log("password", password);
+    // console.log("userName", userName);
+    // console.log("password", password);
     const {data} = await axios.post("http://localhost:3001/authUser/login", {
       userName,
       password

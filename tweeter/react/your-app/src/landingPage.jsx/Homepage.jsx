@@ -3,6 +3,7 @@ import SideBar from "../components/Sidebar";
 import MainBar from "../components/mainbar";
 import ThirdBar from "../components/thirdbar";
 import Home from "../sidebarCompo/home";
+// import { ScrollView } from "react-native";
 
 
 
@@ -16,11 +17,18 @@ function LandingHome (){
         <>
     
        <div className="flex container mx-auto h-full bg-black text-white">
-             {/* <div className="flex w-full h-full "> */}
                  <SideBar changeOption={changeOption}/>
-                <Home  option={options}/>
-             {/* </div>      */}
-                <ThirdBar/>
+                  <Home  option={options}/>
+                 <ThirdBar/>
+
+                 {/* <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
+                    <div className="flex container mx-auto h-full bg-black text-white">
+                      
+                        <Home option={options} />
+                       
+                    </div>
+                </ScrollView>
+                <ThirdBar /> */}
         </div>  
      </>    
     )

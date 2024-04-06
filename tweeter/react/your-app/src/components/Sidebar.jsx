@@ -34,7 +34,7 @@ function SideBar({changeOption}){
                             changeOption("Message")
                         }}><span><TbMessageCircle2Filled /></span>Messages</li>
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full "onClick={()=>{
-                            changeOption("")
+                            changeOption("Profile")
                         }} ><span><CgProfile /></span>Profile</li>
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full " onClick={()=>{
                             changeOption("")

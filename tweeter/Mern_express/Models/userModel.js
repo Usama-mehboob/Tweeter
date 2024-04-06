@@ -140,22 +140,22 @@ module.exports = {
             }
         }
     },
-    getuserByUsername: async (userName) =>{
-        try {
-           const user = await models.users.findOne({
-            where:{
-                userName :  userName,
-            }
-           });
-            return{
-                responce: user,
-            }
-        } catch (error) {
-            return{
-                error: error.message
-            }
-        }
-    },
+    // getuserByUsername: async (userName) =>{
+    //     try {
+    //        const user = await models.users.findOne({
+    //         where:{
+    //             userName :  userName,
+    //         }
+    //        });
+    //         return{
+    //             responce: user,
+    //         }
+    //     } catch (error) {
+    //         return{
+    //             error: error.message
+    //         }
+    //     }
+    // },
 
     deleteUser: async (userId)=>{
         try {
