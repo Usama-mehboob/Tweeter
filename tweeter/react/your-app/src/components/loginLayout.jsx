@@ -12,8 +12,10 @@ function  Login ({setLogin}) {
     // console.log("password", password);
     const {data} = await axios.post("http://localhost:3001/authUser/login", {
       userName,
-      password
+      password,
     });
+    console.log("useranem", userName, "passwoed", password)
+    // console.log("data-yser", data, "username", userName )
     if(data){
       return alert("Invalid Credientials")
     }
@@ -43,7 +45,7 @@ function  Login ({setLogin}) {
                     Password  
                 </label>    
                 <input className="p-2 border-2 border-gray-300 focus:outline-none rounded-md bg-white" 
-                type="password" placeholder="username" required 
+                type="password" placeholder="password" required 
                 onChange={(event)=>{
                     setPassword(event.target.value)
                   

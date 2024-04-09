@@ -4,7 +4,7 @@ const authService = require("../service/authService")
 const loginSchema = joi.object().keys({
     userName : joi.string().required(),
     password: joi.string().required(),
-    array : joi.array().items()
+    // array : joi.array().items()
 })
 
 
@@ -30,11 +30,13 @@ module.exports = {
                     error: loginResponse.error
                 });
             }
-            res.cookie("Token", loginResponse.responce, {maxAge: 900000, httpOnly: true})
+            // const token = sign(loginResponse.responce, process.env.SECRET, { expiresIn: '1h' });
+            res.cookie("Token", loginResponse.responce, {maxAge: 900000000, httpOnly: true})
+            console.log('loginResponse.req',loginResponse.req)
             return res.send({
                 response: true,
                 token: loginResponse.responce,
-                userId: loginResponse.responce.userId,
+                user: loginResponse.user,
           
             });
             
@@ -45,7 +47,9 @@ module.exports = {
              
         }
     },
+user : async (req,res) => {
 
+}
 //     maxNumArray:async(req, res) =>{
 //         try{
 //             const validate = await loginSchema.validateAsync(req.body)

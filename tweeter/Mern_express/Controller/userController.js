@@ -69,13 +69,15 @@ module.exports = {
         try{
             const validate = await getTweetSchema.validateAsync()
             const   tweet = await userService.getTweets(validate);
+            console.log(req.user);
             if(tweet.error){
                 return res.send({
                     error: tweet.error
                 })
             }
             return res.send({
-                response: tweet.response
+                response: tweet.response,
+                user: req.user ?? null
             })
         }catch(error){
             return res.send({

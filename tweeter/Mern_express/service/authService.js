@@ -22,7 +22,7 @@ module.exports = {
     login :async (body) =>{
         try {
            const user = await userModel.getuserByUsername(body.userName);
-        //    console.log("user", user)
+            //    console.log("user", user)
            if (user.error || user.responce == null ){
             return{
                 error: "Invalid user Credentials"
@@ -39,16 +39,20 @@ module.exports = {
            }
 
            delete user.responce.dataValues.password
-           const jwt =  sign(user, process.env.SECRET , {expiresIn: "1h"} );
+           const jwt =  sign(user, process.env.SECRET , {expiresIn: "10 h"} );
            return{
-            responce: jwt
-           }
+            responce: jwt,
+            user
+           };
 
+           
+           
         } catch (error) {
             return{
                 error: error.message
             }
         }
+        
     }
 
     // login: async (validate)=>{
