@@ -17,17 +17,7 @@ function  Login ({setLogin}) {
     console.log("useranem", userName, "passwoed", password)
     localStorage.setItem('user_token',data.token);
     // console.log("data-yser", data, "username", userName )
-    if(<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-    </head>
-    <body>
-      
-    </body>
-    </html>data){
+    if(!data){
       return alert("Invalid Credientials")
     }
     return alert("Logged in successfully")

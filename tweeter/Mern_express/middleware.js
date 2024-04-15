@@ -30,6 +30,7 @@ module.exports ={
     authMiddleware : (req, res, next) => {
         // Get the JWT token from the request headers or cookies
         let token = req.headers.authorization || req.cookies.Token;
+        console.log("token", token)
         if (!token) {
             return res.status(401).json({ error: 'Unauthorized: No token provided' });
         }

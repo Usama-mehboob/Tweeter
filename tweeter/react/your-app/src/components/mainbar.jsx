@@ -9,17 +9,21 @@ import { MdEmojiEmotions } from "react-icons/md";
 
 
 
-
 function Tweets({item}){
+    console.log("item", item)
     return (
     <div className="w-full">
-      <div className="max-w-xs bg-white shadow-md rounded-lg overflow-hidden m-4">
-        <div className="p-4">
-          <p className="text-lg text-gray-600  font-bold"> {item.userName}</p>
-          <p className="text-sm text-gray-600 mt-2">Tweet Text: {item.tweetText}</p>
-          {/* Render other properties as needed */}
+        <div className="min-height: 100px;">
+            <div style={{ minHeight: '150px' }} className="max-w-lg bg-white shadow-md rounded-lg overflow-hidden m-4">
+                <div className="p-4 flex flex-col">
+                <p className="text-lg text-gray-600  font-bold"> gfhgf{item.userName}</p>
+                        <div>
+                        <p className="text-sm text-gray-600 mt-2">Tweet Text: {item.tweetText}</p>
+                        </div>
+                {/* Render other properties as needed */}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
       );
@@ -34,6 +38,18 @@ function MainBar(){
 
     let token = localStorage.getItem("user_token");
     // console.log("Response data local:", token );
+    // useEffect(() => {
+    //     try {
+    //       const storedTweets = JSON.parse(localStorage.getItem("tweets"));
+    //       if (storedTweets) {
+    //         setTweets(storedTweets);
+    //       }
+    //     } catch (error) {
+    //       console.error("Error parsing or setting tweets from localStorage:", error);
+    //     }
+    //   }, []);
+      
+      
    
      
     const fetchUserData = async () => {
@@ -44,27 +60,32 @@ function MainBar(){
             headers: {
                 Authorization: `Bearer ${token}`
              },
-          });
-         setUserData(response.data.response);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+            });
+            setUserData(response.data.response);
+        //   console.log("responseData", response.data.response)
+        //   console.log("responseData", response.data.response.userName)
+        //   console.log("responseData", response.data.response.userId)
+        } catch (error) {
+            console.error("Error fetching user data:", error);
       }
-
+      
     };
     
     useEffect(() => {
         fetchUserData();  
     }, [token]);
-     
+    
     
     
     
     const createTweets = async () => { // Receive userId as an argument
-        
-            const { data } = await axios.post("http://localhost:3001/user/createTweet",{ userName: userData.userName },{
-              headers: {
-                  Authorization: `Bearer ${token}`
-               },
+        await fetchUserData();
+        console.log("responseData 1", userData)
+
+            const { data } = await axios.post("http://localhost:3001/user/createTweet",{ userName: userData.userName, tweetText: tweetText },{
+            //   headers: {
+            //       Authorization: `Bearer ${token}`
+            //    },
             });
             console.log("create-tweetafter", data); // Move console.log here
             if(data.error){
@@ -85,7 +106,7 @@ function MainBar(){
             }); 
             setTweets(Tweets.response);
         } catch (error) {
-            console.error("Error getting tweets:", error);
+            return error("Error getting tweets:", error);
         }
     };
 
@@ -96,6 +117,7 @@ function MainBar(){
 
     return(
     <>
+  
      <div className="w-full  border border-white border-y-black">
                     <div className="flex p-3 relative">
                         <div className="absolute w-12  h-1 rounded-full bg-blue-700 bottom-0 left-[20%]"></div>
@@ -145,7 +167,7 @@ function MainBar(){
                             {Tweet != null ? (
                                 <>
                                     {Tweet.map((item, index) =>{
-                                        console.log("item", item ,"index", index)
+                                        // console.log("item", item ,"index", index)
                                     return  < Tweets item={item} key={index}/>
                                      })}
                                 </>

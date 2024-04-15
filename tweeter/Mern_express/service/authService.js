@@ -40,6 +40,7 @@ module.exports = {
 
            delete user.responce.dataValues.password
            const jwt =  sign(user, process.env.SECRET , {expiresIn: "10 h"} );
+        //    console.log("jwt", jwt)
            return{
             responce: jwt,
             user
