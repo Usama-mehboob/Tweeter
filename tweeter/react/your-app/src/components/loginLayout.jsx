@@ -15,8 +15,19 @@ function  Login ({setLogin}) {
       password,
     });
     console.log("useranem", userName, "passwoed", password)
+    localStorage.setItem('user_token',data.token);
     // console.log("data-yser", data, "username", userName )
-    if(data){
+    if(<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+    </head>
+    <body>
+      
+    </body>
+    </html>data){
       return alert("Invalid Credientials")
     }
     return alert("Logged in successfully")
@@ -34,10 +45,10 @@ function  Login ({setLogin}) {
             </div>
             <div className="h-3/5 flex flex-col p-4 ">
                 <label className="text-xl text-gray-600 my-2 fotn-semibold">
-                    Username  
+                    UserName  
                 </label>    
                 <input className="p-2 border-2 border-gray-300 focus:outline-none rounded-md bg-white" 
-                type="text" placeholder="username" required 
+                type="text" placeholder="userName" required 
                 onChange={(event) =>{
                   setUserName(event.target.value)
                 }} />   

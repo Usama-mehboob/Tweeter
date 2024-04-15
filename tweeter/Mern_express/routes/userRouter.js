@@ -11,6 +11,7 @@ routes.get("/getuser", (req, res) => {
 // routes.post("/getRole", userRouter.getRole);
 routes.post("/createUser", userRouter.createUser);
 routes.get("/getAllUser",middleware.authMiddleware ,userRouter.getAllUser);
+routes.get("/getUserToken",middleware.authMiddleware ,userRouter.getUser);
 // routes.get("/getAllUser" ,userRouter.getAllUser);
 routes.delete("/deleteUser", userRouter.deleteUser);
 routes.patch("/recoverUser", userRouter.recoverUser);

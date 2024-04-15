@@ -27,28 +27,25 @@ function Tweets({item}){
 }
 
 function MainBar(){
-    // const [token, setToken] = usesetUserNameState(localStorage.getItem('token') || '');
     const [Tweet, setTweets] = useState([]);
-    // const [userName, ] =useState("")
     const [tweetText, setTweetText] = useState("");
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState("");
+    
 
     let token = localStorage.getItem("user_token");
-    console.log("Response data:", token );
+    // console.log("Response data local:", token );
    
      
     const fetchUserData = async () => {
 
       try {
         // token = localStorage.getItem("user_token");
-        const response = await axios.post("http://localhost:3001/authUser/login",{
-          // userName: "person9",
-          // password: "1234567"
-        });
-         console.log("Response data:", response);
-         const { userData } = response.data;
-        setUserData(userData);
-        localStorage.setItem('user_token',response.data.token);
+        const response = await axios.get("http://localhost:3001/user/getUserToken",{
+            headers: {
+                Authorization: `Bearer ${token}`
+             },
+          });
+         setUserData(response.data.response);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -56,49 +53,15 @@ function MainBar(){
     };
     
     useEffect(() => {
-      
-     
-        fetchUserData();
-      
+        fetchUserData();  
     }, [token]);
-    
-
-  //   const fetchUserData = async () => {
-  //     try {
-  //        const {data} = await axios.post("http://localhost:3001/authUser/login",{},{
-
-  //             headers: {
-  //                 Authorization: `Bearer ${token}`
-  //             },
-  //         //   userName: "person12",
-  //         //   password: "1234567"
-  //     },);
-  //     setUserName(data);
-  //     console.log("fetch", data)
-  //     } catch (error) {
-  //         console.error("Error fetching user data:", error);
-  //     }
-  //  };
-    
-  //   useEffect(() => {
      
-
-  //       fetchUserData();
-  //   }, []);
-
-
     
-
-    const createTweets = async (userId) => { // Receive userId as an argument
-      
-            const { data } = await axios.post("http://localhost:3001/user/createTweet", {
-                // userName: "person12",
-                // // userId: userId,
-                // tweetText: tweetText 
-               
-                    // Use userId passed as an argument
-                
-            },{
+    
+    
+    const createTweets = async () => { // Receive userId as an argument
+        
+            const { data } = await axios.post("http://localhost:3001/user/createTweet",{ userName: userData.userName },{
               headers: {
                   Authorization: `Bearer ${token}`
                },
@@ -119,7 +82,7 @@ function MainBar(){
             headers: {
               Authorization: `Bearer ${token}`
                },
-            });
+            }); 
             setTweets(Tweets.response);
         } catch (error) {
             console.error("Error getting tweets:", error);

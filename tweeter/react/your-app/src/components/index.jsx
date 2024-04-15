@@ -11,10 +11,10 @@ function  Index () {
     }
     return(
     <>
-        {/* {islogin && <Login setLogin = {updateState} />} 
-        {!islogin &&  <Sigup setLogin = {updateState} />} 
-         */}
-         <LandingHome/> 
+         {/* {islogin && <Login setLogin = {updateState} />} 
+        {!islogin &&  <Sigup setLogin = {updateState} />}  */}
+         
+          <LandingHome/>  
     </>
     );
 

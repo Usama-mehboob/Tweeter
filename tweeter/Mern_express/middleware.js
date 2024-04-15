@@ -34,7 +34,7 @@ module.exports ={
             return res.status(401).json({ error: 'Unauthorized: No token provided' });
         }
         token = token.split('Bearer')[1].trim();
-        console.log(token);
+        // console.log(token);
         try {
             // Decode the token
             const decodedToken = jwt.verify(token, process.env.SECRET);

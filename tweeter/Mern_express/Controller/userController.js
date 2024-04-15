@@ -166,6 +166,27 @@ module.exports = {
             })
         }    
     },
+    getUser: async (req, res)=>{
+    
+
+        try{
+        // const validate = await getAllUserchema.validateAsync()
+        // const getUser = await userService.getAllUser(validate);
+        const getUser = req.user;
+            // if(getUser.error){
+            //     return res.send({
+            //         error: getUser.error
+            //     })
+            // }
+            return res.send({
+                response: getUser
+            })
+        }catch(error){
+            return res.send({
+                error: error.message
+            })
+        }    
+    },
     deleteUser: async (req, res)=>{
         try {
             const validate = await deleteUserSchema.validateAsync(req.query);
