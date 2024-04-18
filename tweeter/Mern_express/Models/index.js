@@ -20,7 +20,7 @@ USERS.hasMany(CHAT, { foreignKey: 'userId' });
 CHAT.belongsTo(USERS, { foreignKey: 'userId' });
 
 MessageThread.hasMany(CHAT, {foreignKey:'messageThreadId'});
-CHAT.belongsTo(MessageThread,{foreignKey:'messageThreadId'});
+CHAT.belongsTo(MessageThread, {foreignKey:'messageThreadId'});
 
 
 

@@ -1,6 +1,6 @@
 import MainBar from "../components/mainbar";
+import ChatRoom from "./ChatRoom";
 import Explore from "./explore";
-import Message from "./message";
 import Profile from "./profile";
 
  function Home({option}){
@@ -9,7 +9,7 @@ import Profile from "./profile";
         <div className="w-full">
            {option == "MainBar" && <MainBar/>} 
            {option == "Explore" && <Explore/>} 
-           {option == "Message" && <Message/>} 
+           {option == "Message" && <ChatRoom/>} 
            {option == "Profile" && <Profile/>}
         </div>
     </>

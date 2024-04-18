@@ -2,6 +2,7 @@ const { Op } = require("sequelize");
 const {models} = require("./index");
 
 module.exports = {
+    //Create tweet 
     createTweet: async (body)=>{
         try{
             const tweet = await models.tweet.create({...body});
@@ -69,20 +70,107 @@ module.exports = {
         }
     },
 
-    // creatAddress: async (body)=>{
-    //     try {
-    //         const creatAddress = await models.address.create({...body})
-    //         return{
-    //             responce: creatAddress,
-    //         }
-    //     } catch (error) {
-    //         return{
-    //             error: error.message,
-    //         }
-    //     }
-    // },
+    //Create  chat 
+    createChat: async (body)=>{
+        try{
+            const chat = await models.chat.create({...body});
+            return{
+                response: chat,
+            }
+        }catch(error){
+            return{
+                error: error.message,
+            }
+        }
+    },
+
+    getAllChat : async () =>{
+        try{
+           const chat = await models.chat.findAll();
+            return{
+                response: chat,
+            }
+        }catch(error){
+            return{
+                error: error.message
+            }
+        }
+    },
+
+    deleteChat: async (userId)=>{
+        try {
+            const deletedChat = await models.chat.destroy({
+                // This is and operator if you want check both condition then use it 
+                // where: {
+                //     userId:  1,
+                //     userName: "user1"
+                // }
+                where: {
+                    userId:  userId,
+                }
+            })
+            return{
+                responce: deletedChat,
+            }
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
+
+    //Creation of Threads
+
+    createThread: async (body)=>{
+        try{
+            const createThread = await models.chat.create({...body});
+            return{
+                response: createThread,
+            }
+        }catch(error){
+            return{
+                error: error.message,
+            }
+        }
+    },
+
+    getAllThread: async () =>{
+        try{
+           const allThread = await models.chat.findAll();
+            return{
+                response: allThread,
+            }
+        }catch(error){
+            return{
+                error: error.message
+            }
+        }
+    },
+
+    deleteThread: async (userId)=>{
+        try {
+            const deletedThread = await models.chat.destroy({
+                // This is and operator if you want check both condition then use it 
+                // where: {
+                //     userId:  1,
+                //     userName: "user1"
+                // }
+                where: {
+                    userId:  userId,
+                }
+            })
+            return{
+                responce: deletedThread,
+            }
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
 
 
+    //Create User
     creatUser: async (body)=>{
         try {
             const creatUser = await models.users.create({...body})

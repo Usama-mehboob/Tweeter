@@ -6,27 +6,108 @@ import { FaGlobeAmericas } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
 import { MdOutlineGifBox } from "react-icons/md";
 import { MdEmojiEmotions } from "react-icons/md";
+import { FaThumbsUp, FaHeart, FaLaugh } from "react-icons/fa";
 
 
 
-function Tweets({item}){
-    console.log("item", item)
+
+function Tweets({item, userData, updateTweetList}){
+    // console.log("item", item)
+    const [commentText, setCommentText] = useState(""); // Define commentText state variable here
+    const [reactions, setReactions] = useState({ like: 0, love: 0, laugh: 0 });
+
+
+    const deleteTweet = async () =>{
+        const {data} = await axios.delete("http://localhost:3001/deleteTweet", {
+            params:{
+                userId: userData.userId,
+            },
+        })
+        alert("user Tweet deleted")
+        if(data.error || !data.response){
+            return alert(" Unable to delete products")
+        }
+        return updateTweetList();
+    }
+    
+    const handleReaction = (reactionType) => {
+        // Update the count of the reaction
+        setReactions((prevReactions) => ({
+            ...prevReactions,
+            [reactionType]: prevReactions[reactionType] + 1,
+        }));
+    };
+
+    const handleComment = async (tweetId) => {
+        // Implement your comment creation logic here
+        console.log("Comment:", commentText, "for Tweet ID:", tweetId);
+        // Reset comment text
+        setCommentText("");
+    };
     return (
-    <div className="w-full">
+        <div className="w-full">
         <div className="min-height: 100px;">
             <div style={{ minHeight: '150px' }} className="max-w-lg bg-white shadow-md rounded-lg overflow-hidden m-4">
                 <div className="p-4 flex flex-col">
-                <p className="text-lg text-gray-600  font-bold"> gfhgf{item.userName}</p>
-                        <div>
-                        <p className="text-sm text-gray-600 mt-2">Tweet Text: {item.tweetText}</p>
+                    <p className="text-lg text-gray-600 font-bold">{userData.userName}</p>
+                    <div>
+                        <p className="text-sm text-gray-600 mt-2">
+                            <span className="text-lg font-bold"> Tweet Text:</span> {item.tweetText}
+                        </p>
+                    </div>
+                    {/* Reaction and comment section */}
+                    <div className="flex items-center justify-between mt-4">
+                        {/* Reaction button */}
+                        <div className="flex items-center space-x-2">
+                            <button
+                                className="flex items-center justify-center w-8 h-8 bg-gray-200  text-black rounded-full"
+                                onClick={() => handleReaction('like')}
+                            >
+                                <FaThumbsUp />
+                                <span className="ml-1">{reactions.like}</span>
+                            </button>
+                            <button
+                                className="flex items-center justify-center w-8 h-8 bg-gray-200 text-black rounded-full"
+                                onClick={() => handleReaction('love')}
+                            >
+                                <FaHeart />
+                                <span className="ml-1">{reactions.love}</span>
+                            </button>
+                          <button   className="flex items-center justify-center w-13 h-8 bg-red-500 text-white rounded-full"
+                              onClick={() => deleteTweet()} >
+                                delete 
+                          </button>
                         </div>
-                {/* Render other properties as needed */}
+                        {/* Comment input */}
+                        <div className="flex items-center">
+                            <input
+                                className="w-full h-7 text-sm bg-gray-200 text-black rounded-md px-2 outline-none"
+                                type="text"
+                                placeholder="Add a comment..."
+                                value={commentText}
+                                onChange={(e) => setCommentText(e.target.value)}
+                            />
+                            <button
+                                className="ml-2 bg-blue-600 px-2 py-1 text-white rounded-md text-sm"
+                                onClick={() => handleComment(item.id)} // Pass tweet ID here
+                            >
+                                Comment
+                            </button>
+                        </div>
+                    </div>
+                    {/* Comments section */}
+                    <div className="mt-2">
+                        {/* Render comments here */}
+                        {/* For example, render comments from item.comments */}
+                        {item.comments && item.comments.map((comment, index) => (
+                            <div key={index} className="text-sm text-gray-600 mt-1">{comment}</div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-      );
+    );
 
 }
 
@@ -49,7 +130,7 @@ function MainBar(){
     //     }
     //   }, []);
       
-      
+   
    
      
     const fetchUserData = async () => {
@@ -83,9 +164,6 @@ function MainBar(){
         console.log("responseData 1", userData)
 
             const { data } = await axios.post("http://localhost:3001/user/createTweet",{ userName: userData.userName, tweetText: tweetText },{
-            //   headers: {
-            //       Authorization: `Bearer ${token}`
-            //    },
             });
             console.log("create-tweetafter", data); // Move console.log here
             if(data.error){
@@ -168,7 +246,7 @@ function MainBar(){
                                 <>
                                     {Tweet.map((item, index) =>{
                                         // console.log("item", item ,"index", index)
-                                    return  < Tweets item={item} key={index}/>
+                                    return  < Tweets item={item} key={index} userData={userData} updateTweetList={getAlltweets}/>
                                      })}
                                 </>
                             ):(
