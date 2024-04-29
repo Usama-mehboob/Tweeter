@@ -1,17 +1,25 @@
 import Index from './components'
+import {Route, Routes, Router} from "react-router-dom"
 import Login from './components/loginLayout'
 import Sigup from './components/signup'
-
+import LandingHome from './landingPage/Homepage'
+// import { Router } from 'react-router-dom'
 
 function App() {
-  // const [count, setCount] = useState(0)/
 
   return (
     <>
-    <div className='w-screen h-screen bg-gray-200'>
+    
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/landing" element={<LandingHome />} />
+      </Routes>
+    
+    
+    {/* <div className='w-screen h-screen bg-gray-200'>
      <Index />
-    </div>
-    {/* <Login /> */}
+    </div> */}
+
     </>
   )
 }

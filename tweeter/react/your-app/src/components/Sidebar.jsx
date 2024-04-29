@@ -25,7 +25,7 @@ function SideBar({changeOption}){
                             changeOption("Explore")
                         }}><span><HiOutlineHashtag /></span>Explore</li>
                         <li className="flex justify-start items-center gap-3 w-fit  hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full " onClick={()=>{
-                            changeOption("")
+                            changeOption("Notification")
                         }}><span><IoNotifications /></span>Notification</li>
                         <li className="flex justify-startitems-center gap-3 w-fit   hover:bg-gray-800 hover: cursor-pointer px-5 py-2 hover: rounded-full " onClick={()=>{
                             changeOption("")

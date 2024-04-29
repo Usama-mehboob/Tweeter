@@ -14,18 +14,19 @@ import { FaThumbsUp, FaHeart, FaLaugh } from "react-icons/fa";
 function Tweets({item, userData, updateTweetList}){
     // console.log("item", item)
     const [commentText, setCommentText] = useState(""); // Define commentText state variable here
-    const [reactions, setReactions] = useState({ like: 0, love: 0, laugh: 0 });
+    const [reactions, setReactions] = useState({ like: 0, love: 0 });
 
 
     const deleteTweet = async () =>{
-        const {data} = await axios.delete("http://localhost:3001/deleteTweet", {
+        const {data} = await axios.delete("http://localhost:3001/user/deleteTweet", {
             params:{
                 userId: userData.userId,
             },
         })
+        console.log("data", data)
         alert("user Tweet deleted")
         if(data.error || !data.response){
-            return alert(" Unable to delete products")
+            return console.log(" Unable to delete products")
         }
         return updateTweetList();
     }
@@ -44,6 +45,8 @@ function Tweets({item, userData, updateTweetList}){
         // Reset comment text
         setCommentText("");
     };
+
+
     return (
         <div className="w-full">
         <div className="min-height: 100px;">
@@ -118,21 +121,7 @@ function MainBar(){
     
 
     let token = localStorage.getItem("user_token");
-    // console.log("Response data local:", token );
-    // useEffect(() => {
-    //     try {
-    //       const storedTweets = JSON.parse(localStorage.getItem("tweets"));
-    //       if (storedTweets) {
-    //         setTweets(storedTweets);
-    //       }
-    //     } catch (error) {
-    //       console.error("Error parsing or setting tweets from localStorage:", error);
-    //     }
-    //   }, []);
-      
-   
-   
-     
+  
     const fetchUserData = async () => {
 
       try {
@@ -167,9 +156,13 @@ function MainBar(){
             });
             console.log("create-tweetafter", data); // Move console.log here
             if(data.error){
-                return alert("Unable to create User")
+                return alert("Unable to create Tweet")
             }
             alert  (" create Tweet SuccessFully")
+            setTweetText("");
+            setTweets(prevTweets => [data.response, ...prevTweets]);
+            void getAlltweets()
+            // setTweets(prevTweets => [data.response, ...prevTweets]);
             // return setLogin(true)
     };  
 
@@ -256,7 +249,7 @@ function MainBar(){
                             )
                             }
                         </div>
-                    </div>
+                </div>
                 
             </div>  
     

@@ -169,7 +169,57 @@ module.exports = {
         }
     },
 
+    //Create Notification
+    createNotification: async (body)=>{
+        try{
+            const createNotification = await models.Notification.create({...body});
+            return{
+                response: createNotification,
+            }
+        }catch(error){
+            return{
+                error: error.message,
+            }
+        }
+    },
 
+    getAllTNotification: async () =>{
+        try{
+           const getAllNotification = await models.Notification.findAll();
+            return{
+                response: getAllNotification,
+            }
+        }catch(error){
+            return{
+                error: error.message
+            }
+        }
+    },
+
+    deleteNotification: async (userId)=>{
+        try {
+            const deleteNotification = await models.chat.destroy({
+                // This is and operator if you want check both condition then use it 
+                // where: {
+                //     userId:  1,
+                //     userName: "user1"
+                // }
+                where: {
+                    tweetId:  tweetId,
+                }
+            })
+            return{
+                responce: deleteNotification,
+            }
+        } catch (error) {
+            return{
+                error: error.message
+            }
+        }
+    },
+
+
+    
     //Create User
     creatUser: async (body)=>{
         try {

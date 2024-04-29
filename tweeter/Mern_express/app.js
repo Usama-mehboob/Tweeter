@@ -13,8 +13,8 @@ var cors = require("cors");
 // var routes = require("./routes/userRouter")
 var Authrouter = require("./routes/Authroutes")
 var userRouter = require("./routes/userRouter")
-var chatrouter = require("./routes/chatrouter")
-var ThreadRouter = require("./routes/ThreadRouters")
+// var chatrouter = require("./routes/chatrouter")
+// var ThreadRouter = require("./routes/ThreadRouters")
 var app = express();
 // var server = http.createServer(app);
 // Initialize Socket.IO after creating the server instance
@@ -42,13 +42,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Apply CORS middleware without the trailing comma
-app.use(cors());
+app.use(cors(
+//   {
+//   origin: 'http://localhost:3000', // Replace with your React app's URL
+//   methods: ['GET', 'POST'],
+// },{
+//   origin: 'http://localhost:3002', // Replace with your React app's URL
+//   methods: ['GET', 'POST'],
+// }
+));
 
 // app.use("/user", routes);
 app.use("/authUser", Authrouter);
 app.use("/user", userRouter);
-app.use("/chat", chatrouter )
-app.use("/thread", ThreadRouter)
+// app.use("/chat", chatrouter )
+// app.use("/thread", ThreadRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

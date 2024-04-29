@@ -83,78 +83,138 @@ module.exports = {
     },
 
 
-        // Create Chat 
-    createChat: async (body) =>{
-        try{
-            body.userId = uuid();
-           const createdChat = await userModel.createChat(body);
-           if(createdChat.error){
-            return{
-                error: createdChat.error,
-            }
-           }
-           return{
-            response: createdChat.response
-           }
-        }catch(error){
-            return {
-                error: error.message
-            }
-        }
-    },
+    //     // Create Chat 
+    // createChat: async (body) =>{
+    //     try{
+    //         body.userId = uuid();
+    //        const createdChat = await userModel.createChat(body);
+    //        if(createdChat.error){
+    //         return{
+    //             error: createdChat.error,
+    //         }
+    //        }
+    //        return{
+    //         response: createdChat.response
+    //        }
+    //     }catch(error){
+    //         return {
+    //             error: error.message
+    //         }
+    //     }
+    // },
 
     
 
-    getAllChat: async ()=>{
-        try{
-          const getAllThread = await userModel.getAllThread();
-          if (getAllThread.error){
-            return{
-                error: getAllThread.error
-            }
-          }
-          return{
-            response: getAllThread.response
-          }
-        }catch(error){
-           return{
-            error: error.message
-           }
-        }
-    },
+    // getAllChat: async ()=>{
+    //     try{
+    //       const getAllThread = await userModel.getAllThread();
+    //       if (getAllThread.error){
+    //         return{
+    //             error: getAllThread.error
+    //         }
+    //       }
+    //       return{
+    //         response: getAllThread.response
+    //       }
+    //     }catch(error){
+    //        return{
+    //         error: error.message
+    //        }
+    //     }
+    // },
 
-    deleteChat: async (query)=>{
-        try {
-            const deletedChat = await userModel.deleteChat(query.userId);
-            if (deletedChat.error){
-                return{
-                    error: deletedChat.error
-                }
-              }
-              return{
-                response: deletedChat.responce
-              }
+    // deleteChat: async (query)=>{
+    //     try {
+    //         const deletedChat = await userModel.deleteChat(query.userId);
+    //         if (deletedChat.error){
+    //             return{
+    //                 error: deletedChat.error
+    //             }
+    //           }
+    //           return{
+    //             response: deletedChat.responce
+    //           }
            
-        } catch (error) {
-            return{
-                error: error.message
-            }
-        }
-    },
+    //     } catch (error) {
+    //         return{
+    //             error: error.message
+    //         }
+    //     }
+    // },
 
-     // Create Thread
+    //  // Create Thread
 
-    createThread : async (body) =>{
+    // createThread : async (body) =>{
+    //     try{
+    //         body.userId = uuid();
+    //        const createdThread = await userModel.createThread(body);
+    //        if(createdThread.error){
+    //         return{
+    //             error: createdThread.error,
+    //         }
+    //        }
+    //        return{
+    //         response: createdThread.response
+    //        }
+    //     }catch(error){
+    //         return {
+    //             error: error.message
+    //         }
+    //     }
+    // },
+
+    
+
+    // getAllThread: async ()=>{
+    //     try{
+    //       const getAllThread = await userModel.getAllThread();
+    //       if (getAllThread.error){
+    //         return{
+    //             error: getAllThread.error
+    //         }
+    //       }
+    //       return{
+    //         response: getAllThread.response
+    //       }
+    //     }catch(error){
+    //        return{
+    //         error: error.message
+    //        }
+    //     }
+    // },
+
+    // deleteThread: async (query)=>{
+    //     try {
+    //         const deletedThread = await userModel.deleteThread(query.userId);
+    //         if (deletedThread.error){
+    //             return{
+    //                 error: deletedThread.error
+    //             }
+    //           }
+    //           return{
+    //             response: deletedThread.responce
+    //           }
+           
+    //     } catch (error) {
+    //         return{
+    //             error: error.message
+    //         }
+    //     }
+    // },
+    
+    //Create Notification 
+
+    createNotification : async (body) =>{
         try{
-            body.userId = uuid();
-           const createdThread = await userModel.createThread(body);
-           if(createdThread.error){
+            body.tweetId = uuid();
+           const createdNotification  = await userModel.createNotification(body);
+           if(createdNotification.error){
             return{
-                error: createdThread.error,
+                error: createdNotification.error,
             }
            }
            return{
-            response: createdThread.response
+            response: createdNotification.response
            }
         }catch(error){
             return {
@@ -165,16 +225,16 @@ module.exports = {
 
     
 
-    getAllThread: async ()=>{
+    getAllNotification : async ()=>{
         try{
-          const getAllThread = await userModel.getAllThread();
-          if (getAllThread.error){
+          const getAllNotification = await userModel.getAllTNotification();
+          if (getAllNotification.error){
             return{
-                error: getAllThread.error
+                error: getAllNotification.error
             }
           }
           return{
-            response: getAllThread.response
+            response: getAllNotification.response
           }
         }catch(error){
            return{
@@ -183,16 +243,16 @@ module.exports = {
         }
     },
 
-    deleteThread: async (query)=>{
+    deleteNotification: async (query)=>{
         try {
-            const deletedThread = await userModel.deleteThread(query.userId);
-            if (deletedThread.error){
+            const deletedNotification = await userModel.deleteNotification(query.tweetId);
+            if (deletedNotification.error){
                 return{
-                    error: deletedThread.error
+                    error: deletedNotification.error
                 }
               }
               return{
-                response: deletedThread.responce
+                response: deletedNotification.responce
               }
            
         } catch (error) {

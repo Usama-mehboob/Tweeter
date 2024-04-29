@@ -1,40 +1,76 @@
-const express = require('express');
+// const express = require('express');
+// const app = express();
+// const http = require('http');
+
+// const { Server } = require("socket.io");
+// const server = http.createServer(app); 
+
+// const io = new Server(server, {
+//   cors:{
+//     origin: "http://localhost:3001",
+//     methods: ["GET", "POST"]
+//   }
+// });
+
+
+
+// io.on('connection', (socket) => {
+//   console.log(`User is Connected: ${socket.id}`);
+  
+//   socket.emit('Welcome', "Welcome to the channel");
+  
+//   socket.on("join_room", (data) =>{
+//     socket.join(data)
+//   })
+//   socket.on('send_message', (data) => {
+//     // console.log('client user', data);
+//     socket.to(data.room).emit("recieve_message", data )
+//   });
+  
+//   // Add more event handlers as needed
+// });
+
+// server.listen(3002, ()=>{
+//   console.log("Server is Running")
+// })
+// // console.log('Socket.io server running on port 3001', io);
+
+
+const express = require("express");
 const app = express();
-const http = require('http');
+const http = require("http");
+const cors = require("cors");
+const socketIo  = require("socket.io");
+const server = http.createServer(app);
+// const io = require("socket.io")(server);
+// const io = new Server(server, {
+//     cors: {
+//         origin: "http://localhost:3001",
+//         methods: ["GET", "POST"]
+//     }
+// });
+app.use(cors()); // Enable CORS for all routes
+const io = socketIo(server);
+io.on("connection", (socket) => {
+    console.log(`User connected: ${socket.id}`);
+  
+    socket.on("join_room", (data) => {
+        socket.join(data);
+    });
 
-const { Server } = require("socket.io");
-const server = http.createServer(app); 
+    socket.on("send_message", (data) => {
+        socket.to(data.room).emit("receive_message", data);
+    });
 
-const io = new Server(server, {
-  cors:{
-    origin: "http://localhost:3001",
-    methods: ["GET", "POST"]
-  }
+    socket.on("disconnect", () => {
+        console.log(`User disconnected: ${socket.id}`);
+    });
 });
 
-
-
-io.on('connection', (socket) => {
-  console.log(`User is Connected: ${socket.id}`);
-  
-  // socket.emit('Welcome', "Welcome to the channel");
-  socket.on("join_room", (data) =>{
-    socket.join(data)
-  })
-  socket.on('send_message', (data) => {
-    // console.log('client user', data);
-    socket.to(data.room).emit("recieve_message", data )
-  });
-  
-  // Add more event handlers as needed
+const PORT = 3002;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-
-server.listen(3002, ()=>{
-  console.log("Server is Running")
-})
-// console.log('Socket.io server running on port 3001', io);
-
-
 
 
 

@@ -5,7 +5,6 @@ const joi = require("joi");
 
     const createTweetSchema = joi.object().keys({
         userName: joi.string().required(),
-        // userId: joi.string().required(),
         tweetText:  joi.string()
     })
 
@@ -15,47 +14,61 @@ const joi = require("joi");
     })
 
     const deleteTweetSchema = joi.object().keys({
-        userId: joi.string().min(1).required()
+        userId: joi.string()
     })
 
     const updatedTweetSchema = joi.object().keys({
         userName: joi.string().required()
     })
 
-    //Create Chat Schema 
+//     //Create Chat Schema 
 
-    const createChatSchema = joi.object().keys({
-        // userName: joi.string().required(),
-        userId: joi.string().required(),
-        chatText:  joi.string()
+//     const createChatSchema = joi.object().keys({
+//         // userName: joi.string().required(),
+//         userId: joi.string().required(),
+//         chatText:  joi.string()
+//     })
+
+
+//     const getAllChatSchema = joi.object().keys({
+//         rolename: joi.string().required()
+//     })
+
+//     const deleteChatSchema = joi.object().keys({
+//         userId: joi.string().min(1).required()
+//     })
+
+//    //Create Thread Schema 
+
+//    const createThreadSchema = joi.object().keys({
+//     userName: joi.string().required(),
+//     // userId: joi.string().required(),
+//     tweetText:  joi.string()
+//     })
+
+
+//     const getAllThreadSchema = joi.object().keys({
+//         rolename: joi.string().required()
+//     })
+
+//     const deleteThreadSchema = joi.object().keys({
+//         userId: joi.string().min(1).required()
+//     })
+    //Create Notification 
+
+    const createNotificaitonSchema = joi.object().keys({
+        tweetId: joi.string().required(),
+        notificationText:  joi.string()
     })
 
 
-    const getAllChatSchema = joi.object().keys({
-        rolename: joi.string().required()
+    const getNotificationSchema = joi.object().keys({
+        rolename: joi.string()
     })
 
-    const deleteChatSchema = joi.object().keys({
-        userId: joi.string().min(1).required()
+    const deleteNotificationSchema = joi.object().keys({
+        tweetId: joi.string()
     })
-
-   //Create Thread Schema 
-
-   const createThreadSchema = joi.object().keys({
-    userName: joi.string().required(),
-    // userId: joi.string().required(),
-    tweetText:  joi.string()
-    })
-
-
-    const getAllThreadSchema = joi.object().keys({
-        rolename: joi.string().required()
-    })
-
-    const deleteThreadSchema = joi.object().keys({
-        userId: joi.string().min(1).required()
-    })
-
     
     //User Schema 
 
@@ -168,85 +181,150 @@ module.exports = {
 
     // Create Chat 
 
-    creatChat: async (req, res)=>{
+    // creatChat: async (req, res)=>{
        
-        try{
-            const validate = await createChatSchema.validateAsync(req.body)
-            const chat = await userService.createChat(validate);
-            console.log("chat", chat)
-            if(chat.error){
-                return res.send({
-                    error: chat.error
-                })
-            }
-            return res.send({
-                response: chat.response
-            })
-        }catch(error){
-            return res.send({
-                error: error.message
-            })
-        }    
-        },
+    //     try{
+    //         const validate = await createChatSchema.validateAsync(req.body)
+    //         const chat = await userService.createChat(validate);
+    //         console.log("chat", chat)
+    //         if(chat.error){
+    //             return res.send({
+    //                 error: chat.error
+    //             })
+    //         }
+    //         return res.send({
+    //             response: chat.response
+    //         })
+    //     }catch(error){
+    //         return res.send({
+    //             error: error.message
+    //         })
+    //     }    
+    //     },
     
     
-        getAllChat : async (req, res)=>{
+    //     getAllChat : async (req, res)=>{
     
-            try{
-                const validate = await getAllChatSchema.validateAsync()
-                const   chat = await userService.getAllChat(validate);
-                // console.log(req.user);
-                if(chat.error){
-                    return res.send({
-                        error: chat.error
-                    })
-                }
-                return res.send({
-                    response: chat.response,
-                    user: req.user ?? null
-                })
-            }catch(error){
-                return res.send({
-                    error: error.message
-                })
-            }    
-        },
+    //         try{
+    //             const validate = await getAllChatSchema.validateAsync()
+    //             const   chat = await userService.getAllChat(validate);
+    //             // console.log(req.user);
+    //             if(chat.error){
+    //                 return res.send({
+    //                     error: chat.error
+    //                 })
+    //             }
+    //             return res.send({
+    //                 response: chat.response,
+    //                 user: req.user ?? null
+    //             })
+    //         }catch(error){
+    //             return res.send({
+    //                 error: error.message
+    //             })
+    //         }    
+    //     },
     
-        deleteChat: async (req, res)=>{
-            try {
-                const validate = await deleteChatSchema.validateAsync(req.query);
-                const deletedChat = await userService.deleteChat(validate);
-                if (deletedChat.error){
-                    return res.send({
-                        error: deletedChat.error
-                    })
-                  }
-                  return res.send({
-                    response: deletedChat.response
-                  })
+    //     deleteChat: async (req, res)=>{
+    //         try {
+    //             const validate = await deleteChatSchema.validateAsync(req.query);
+    //             const deletedChat = await userService.deleteChat(validate);
+    //             if (deletedChat.error){
+    //                 return res.send({
+    //                     error: deletedChat.error
+    //                 })
+    //               }
+    //               return res.send({
+    //                 response: deletedChat.response
+    //               })
                
-            } catch (error) {
-                return res.send({
-                    error: error.message
-                })
-            }
-        },
+    //         } catch (error) {
+    //             return res.send({
+    //                 error: error.message
+    //             })
+    //         }
+    //     },
     
     
-      //Create Thread
+    //   //Create Thread
 
-      createThread: async (req, res)=>{
+    //   createThread: async (req, res)=>{
+       
+    //     try{
+    //         const validate = await createThreadSchema.validateAsync(req.body)
+    //         const Thread = await userService.createThread(validate);
+    //         if(Thread.error){
+    //             return res.send({
+    //                 error: Thread.error
+    //             })
+    //         }
+    //         return res.send({
+    //             response: Thread.response
+    //         })
+    //     }catch(error){
+    //         return res.send({
+    //             error: error.message
+    //         })
+    //     }    
+    //     },
+    
+    
+    //     getAllThread: async (req, res)=>{
+    
+    //         try{
+    //             const validate = await getAllThreadSchema.validateAsync()
+    //             const   thread = await userService.getAllThread(validate);
+    //             // console.log(req.user);
+    //             if(thread.error){
+    //                 return res.send({
+    //                     error: thread.error
+    //                 })
+    //             }
+    //             return res.send({
+    //                 response: thread.response,
+    //                 user: req.user ?? null
+    //             })
+    //         }catch(error){
+    //             return res.send({
+    //                 error: error.message
+    //             })
+    //         }    
+    //     },
+    
+    //     deleteThread: async (req, res)=>{
+    //         try {
+    //             const validate = await deleteThreadSchema.validateAsync(req.query);
+    //             const deletedThread = await userService.deleteThread(validate);
+    //             if (deletedThread.error){
+    //                 return res.send({
+    //                     error: deletedThread.error
+    //                 })
+    //               }
+    //               return res.send({
+    //                 response: deletedThread.response
+    //               })
+               
+    //         } catch (error) {
+    //             return res.send({
+    //                 error: error.message
+    //             })
+    //         }
+    //     },
+
+    //Create notification 
+
+    createNotification: async (req, res)=>{
        
         try{
-            const validate = await createThreadSchema.validateAsync(req.body)
-            const Thread = await userService.createThread(validate);
-            if(Thread.error){
+            const validate = await createNotificaitonSchema.validateAsync(req.body)
+            const Notificatoin = await userService.createNotification(validate);
+            if(Notificatoin.error){
                 return res.send({
-                    error: Thread.error
+                    error: Notificatoin.error
                 })
             }
             return res.send({
-                response: Thread.response
+                response: Notificatoin.response
             })
         }catch(error){
             return res.send({
@@ -256,19 +334,19 @@ module.exports = {
         },
     
     
-        getAllThread: async (req, res)=>{
+        getNotification: async (req, res)=>{
     
             try{
-                const validate = await getAllThreadSchema.validateAsync()
-                const   thread = await userService.getAllThread(validate);
-                // console.log(req.user);
-                if(thread.error){
+                const validate = await getNotificationSchema.validateAsync()
+                const   Notificatoin = await userService.getAllNotification(validate);
+                console.log(req.user);
+                if(Notificatoin.error){
                     return res.send({
-                        error: thread.error
+                        error: Notificatoin.error
                     })
                 }
                 return res.send({
-                    response: thread.response,
+                    response: Notificatoin.response,
                     user: req.user ?? null
                 })
             }catch(error){
@@ -278,17 +356,17 @@ module.exports = {
             }    
         },
     
-        deleteThread: async (req, res)=>{
+        deleteNotification: async (req, res)=>{
             try {
-                const validate = await deleteThreadSchema.validateAsync(req.query);
-                const deletedThread = await userService.deleteThread(validate);
-                if (deletedThread.error){
+                const validate = await deleteNotificationSchema.validateAsync(req.query);
+                const Notificatoin = await userService.deleteNotification(validate);
+                if (Notificatoin.error){
                     return res.send({
-                        error: deletedThread.error
+                        error: Notificatoin.error
                     })
                   }
                   return res.send({
-                    response: deletedThread.response
+                    response: Notificatoin.response
                   })
                
             } catch (error) {
@@ -297,6 +375,7 @@ module.exports = {
                 })
             }
         },
+
     
     //Create User 
 

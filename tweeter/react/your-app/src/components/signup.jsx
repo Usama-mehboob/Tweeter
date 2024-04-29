@@ -5,37 +5,13 @@ import Select  from "react-select";
 function  Sigup ({setLogin}) {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    // const [address, setAddress] = useState("");
-    // const [roleId, setRoleId] = useState("");   
-    // const [roles, setRoles] = useState("");
-
-    // const getRoles = async  () =>{
-    //   const {data} = await axios.get("http://localhost:3001/user/getRole");
-    //   if(data.error){
-    //     return alert ("No Roles exit")
-    //   }
-        
-    //   let  roleDropDown = []
-
-    //   data.response.map((roles)=>{
-    //     const roleValues = {
-    //       label: roles.rolename,
-    //       value: roles.roleId   
-    //     }
-    //     console.log(roles)
-    //     roleDropDown.push(roleValues);
-    //   })
-    //   console.log(data.response)
-    //   setRoles(roleDropDown);
-    // }
+   
 
     const sigup = async () =>{
       const {data} = await axios.post("http://localhost:3001/user/createUser",  {
         userName, password,
       }, 
-      // {
-      //   withCredentials: true
-      // }
+     
       )
       console.log(data)
         if(data.error){
@@ -78,16 +54,7 @@ function  Sigup ({setLogin}) {
                 //  onChange={(e) =>{
                 //   setAddress(e.target.value)}}
                 /> 
-                {/* <label className="text-xl text-gray-600 my-2 fotn-semibold">
-                   Role 
-                </label>    
-                <Select className="rounded-md w-64 text-gray-500 focus: outline-none "
-                 isSearchable ={true} 
-                 options={roles}
-                 onChange = {(selectedOption)=>{
-                  setRoleId(selectedOption.value)
-                 }}
-                 placeholder="Select role" /> */}
+               
                 <p className="bg-black-600">
                   {"Already have an account ?"} <span className="hover: text-blue-700 hover:underline cursor-pointer "
                     onClick={() =>{
@@ -102,7 +69,7 @@ function  Sigup ({setLogin}) {
               disabled={!(userName, password)}
               className=" text-xl bg-gray-600 focus:oultine-none focus-border-transparent"
               onClick={()=>{
-                void sigup()
+                void sigup(true)
               }}>
                  Sign Up
               </button>

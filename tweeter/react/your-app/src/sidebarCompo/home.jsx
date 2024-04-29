@@ -2,6 +2,7 @@ import MainBar from "../components/mainbar";
 import ChatRoom from "./ChatRoom";
 import Explore from "./explore";
 import Profile from "./profile";
+import  Notification from "./notification";
 
  function Home({option}){
     return(
@@ -11,6 +12,7 @@ import Profile from "./profile";
            {option == "Explore" && <Explore/>} 
            {option == "Message" && <ChatRoom/>} 
            {option == "Profile" && <Profile/>}
+           {option == "Notification" && <Notification/>}
         </div>
     </>
     )

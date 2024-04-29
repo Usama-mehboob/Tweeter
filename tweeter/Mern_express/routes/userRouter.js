@@ -22,6 +22,11 @@ routes.get("/getAllTweet", userRouter.getTweet);
 routes.delete("/deleteTweet", userRouter.deleteTweet);
 routes.put("/updateTweet", userRouter.updatedTweet);
 
+routes.post("/createNotification", userRouter.createNotification);
+routes.get("/getAllNotification", userRouter.getNotification);
+routes.delete("/deleteNotification", userRouter.deleteNotification);
+
+
 
 
 
