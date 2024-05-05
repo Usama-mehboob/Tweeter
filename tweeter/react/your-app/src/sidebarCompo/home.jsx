@@ -12,7 +12,7 @@ import  Notification from "./notification";
            {option == "Explore" && <Explore/>} 
            {option == "Message" && <ChatRoom/>} 
            {option == "Profile" && <Profile/>}
-           {option == "Notification" && <Notification/>}
+           {option == "Notification" && <Notification />}
         </div>
     </>
     )
